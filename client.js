@@ -1,8 +1,8 @@
-var clue = {};
+let clue = {};
 
-var characters = ['Mrs. Peacock', 'Mrs. White', 'Col. Mustard', 'Ms. Scarlet', 'Rev. Green', 'Prof. Plum'];
-var weapons = ['lead pipe', 'pistol', 'candlestick', 'rope', 'knife', 'wrench'];
-var rooms = ['library', 'study', 'kitchen', 'ballroom', 'conservatory', 'billiards room', 'hall', 'lounge', 'dining room', 'cellar'];
+let characters = ['Mrs. Peacock', 'Mrs. White', 'Col. Mustard', 'Ms. Scarlet', 'Rev. Green', 'Prof. Plum'];
+let weapons = ['lead pipe', 'pistol', 'candlestick', 'rope', 'knife', 'wrench'];
+let rooms = ['library', 'study', 'kitchen', 'ballroom', 'conservatory', 'billiards room', 'hall', 'lounge', 'dining room', 'cellar'];
 
 clue.characters = characters;
 clue['weapons'] = weapons;
@@ -10,7 +10,7 @@ clue.rooms = rooms;
 
 console.log('Clue game contents:', clue);
 
-var solution = {
+let solution = {
 	name: clue.characters[0],
 	weapon: clue.weapons[3],
 	room: clue.rooms[5]
@@ -19,7 +19,7 @@ var solution = {
 console.log('Solution:', solution);
 
 // DESTRUCTURING - ES6 way of pulling out variables from an object (or array) in a quick way
-var {weapon, room} = solution;
+let {weapon, room} = solution;
 
 console.log(solution.name + ' used the ' + weapon + ' in the ' + room);
 
@@ -34,7 +34,7 @@ const game = {
 }
 
 // standard for-loop
-for (var i = 0; i < game.suspects.length; i++) {
+for (let i = 0; i < game.suspects.length; i++) {
 	console.log('standard for-looping through the suspects, suspect', i, 'is', game.suspects[i].color, game.suspects[i].name);
 }
 
@@ -44,7 +44,7 @@ for (let i in game.suspects) {
 }
 
 // looping over object properties -- not so easy to loop through object keys
-for (var i = 0; i < game.suspects.length; i++) {
+for (let i = 0; i < game.suspects.length; i++) {
 	console.log('current suspect in nested loops', game.suspects[i]);
 	for (let prop in game.suspects[i]) {
 		console.log(prop, 'of suspect', i, 'is', game.suspects[i][prop]);
@@ -66,7 +66,7 @@ game.suspects.forEach(function(suspect) {
 
 console.log('new suspects array:', game.suspects);
 
-var suspects = [{
+let suspects = [{
 	name: 'Rusty',
 	color: 'orange'
 }, {
@@ -75,10 +75,10 @@ var suspects = [{
 }];
 
 // one way to destructure...
-var [color1, color2] = [suspects[0].color, suspects[1].color];
+let [color1, color2] = [suspects[0].color, suspects[1].color];
 console.log('color1', color1, 'color2', color2);
 // another, more succinct way to destructure...
-var [{color: firstColor}, {color: secondColor}] = suspects;
+let [{color: firstColor}, {color: secondColor}] = suspects;
 console.log('firstColor', firstColor, 'secondColor', secondColor);
 
 // hydration...
@@ -92,9 +92,9 @@ function CreateSuspectObject(name) {
 	};
 }
 
-var suspects = ['Miss Scarlet', 'Colonel Mustard', 'Mr. White'];
+suspects = ['Miss Scarlet', 'Colonel Mustard', 'Mr. White'];
 
-var suspectsList = [];
+let suspectsList = [];
 
 suspects.forEach(function(name) {
 	suspectsList.push(CreateSuspectObject(name));
@@ -107,7 +107,7 @@ const _ = {};
 _.each = function(list, callback) {
 	if (Array.isArray(list)) {
 		console.log('array hit');
-		for (var i = 0; i < list.length; i++) {
+		for (let i = 0; i < list.length; i++) {
 			// call the callback function passing the current array element, current array index and the entire array
 			callback(list[i], i, list);
 		}
@@ -126,13 +126,13 @@ function logItem(element, index, list) {
 	console.log('element', element);
 }
 
-var colors = ['silver snakes', 'green monkeys', 'blue barracudas'];
+let colors = ['silver snakes', 'green monkeys', 'blue barracudas'];
 _.each(colors, logItem);
 
-var obj = {'hi': 'hello', 'bye': 'goodbye'};
+let obj = {'hi': 'hello', 'bye': 'goodbye'};
 _.each(obj, logItem);
 
-var templeGoers = [];
+let templeGoers = [];
 
 function CreateTeamObject(teamName) {
 	return {
@@ -166,7 +166,7 @@ _.map = function(list, iterator) {
 
 	if (Array.isArray(list)) {
 		console.log('array hit');
-		for (var i = 0; i < list.length; i++) {
+		for (let i = 0; i < list.length; i++) {
 			// call the callback function passing the current array element, current array index and the entire array
 			newArray.push(iterator(list[i]));
 		}
@@ -186,17 +186,143 @@ function makeBroken(item) {
 	return `broken ${item}`;
 }
 
-var brokenArray = _.map(weapons, makeBroken);
+let brokenArray = _.map(weapons, makeBroken);
 console.log('weapons', weapons);
 console.log('broken weapons', brokenArray);
 
 console.log('suspects', suspects);
-var suspectsList = []; // wipe out prior example
+suspectsList = []; // wipe out prior example
 console.log('suspectsList', suspectsList);
 suspectsList = _.map(suspects, CreateSuspectObject);
 console.log('new suspectsList', suspectsList);
 
-var people = ['teacher', 'student', 'worker'];
+let people = ['teacher', 'student', 'worker'];
 console.log('people', people);
-var brokenPeople = _.map(people, makeBroken);
+let brokenPeople = _.map(people, makeBroken);
 console.log('broken people', brokenPeople);
+
+// FILTER -- _.filter()
+// returns a new array of array elements deemed true by the callback function
+
+const videoData = [
+	{
+			name: 'Miss Scarlet',
+			present: true,
+			rooms: [
+					{kitchen: false},
+					{ballroom: false},
+					{conservatory: false},
+					{'dining room': false},
+					{'billiard room': false},
+					{library: false}
+			]
+	},
+	{
+			name: 'Mrs. White',
+			present: false,
+			rooms: [
+					{kitchen: false},
+					{ballroom: false},
+					{conservatory: false},
+					{'dining room': false},
+					{'billiard room': false},
+					{library: false}
+			]
+	},
+	{
+			name: 'Reverend Green',
+			present: true,
+			rooms: [
+					{kitchen: false},
+					{ballroom: false},
+					{conservatory: false},
+					{'dining room': false},
+					{'billiard room': false},
+					{library: false}
+			]
+	},
+	{
+			name: 'Rusty',
+			present: false,
+			rooms: [
+					{kitchen: false},
+					{ballroom: false},
+					{conservatory: false},
+					{'dining room': false},
+					{'billiard room': false},
+					{library: false}
+			]
+	},
+	{
+			name: 'Colonel Mustard',
+			present: true,
+			rooms: [
+					{kitchen: false},
+					{ballroom: false},
+					{conservatory: false},
+					{'dining room': false},
+					{'billiard room': false},
+					{library: false}
+			]
+	},
+	{
+			name: 'Professor Plum',
+			present: true,
+			rooms: [
+					{kitchen: false},
+					{ballroom: false},
+					{conservatory: false},
+					{'dining room': false},
+					{'billiard room': false},
+					{library: false}
+			]
+	}
+];
+
+_.filter = (arr, callback) => {
+	if (!Array.isArray(arr)) {
+		return 'FIRST INPUT MUST BE ARRAY!';
+	}
+
+	const truthyArray = [];
+
+	_.each(arr, (element, index, list) => {
+		if (callback(element)) {
+			truthyArray.push(element);
+		}
+	})
+
+	return truthyArray;
+};
+
+/* IMPLEMENTING _.filter() USING LOOPS
+_.filter = (arr, callback) => {
+	if (!Array.isArray(arr)) {
+		return 'FIRST INPUT MUST BE ARRAY!';
+	}
+
+	const truthyArray = [];
+
+	for (let i = 0; i < arr.length; i++) {
+		if (callback(arr[i])) {
+			truthyArray.push(arr[i]);
+		}
+	}
+
+	return truthyArray;
+};
+*/
+
+let filteredVideoData = _.filter(videoData, (suspectObj) => {
+	if (suspectObj.present) {
+		return true;
+	} else {
+		return false;
+	}
+});
+
+console.log('videoData', videoData);
+console.log('filtered videData', filteredVideoData);
+
+let testObj = {hi: 'hello', bye: 'goodbye'};
+console.log()
