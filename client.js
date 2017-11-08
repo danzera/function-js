@@ -377,3 +377,32 @@ var arrayLikeObj = {
 
 console.log('array-like object =', arrayLikeObj);
 console.log('_.from(arrayLikeObj) =', _.from(arrayLikeObj));
+
+// ES6 SYNTAX
+
+/*
+var increment = function(n) {
+	return n + 1;
+};
+*/
+// parens can be omitted in the case of functions having only one parameter
+let increment = n => { return n + 1; };
+
+/*
+var square = function(n) {
+	return n * n;
+}
+*/
+
+let square = n => {	return n * n; };
+
+/*
+var doMathSoIDontHaveTo = function(n, func) {
+	return func(n);
+}
+*/
+
+let doMathSoIDontHaveTo = (n, func) => { return func(n); };
+
+console.log(doMathSoIDontHaveTo(5, square));
+console.log(doMathSoIDontHaveTo(4, increment));
