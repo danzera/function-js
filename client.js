@@ -406,3 +406,30 @@ let doMathSoIDontHaveTo = (n, func) => { return func(n); };
 
 console.log(doMathSoIDontHaveTo(5, square));
 console.log(doMathSoIDontHaveTo(4, increment));
+
+// IMPLEMENTING _.reduce()
+_.reduce = (list, callback, initialVal) => {
+	let memo = initialVal;
+	// loop through the list
+	for (var i = 0; i < list.length; i++) {
+		if (i === 0 && memo === undefined) {
+			memo = list[0];
+		} else {
+			// call the callback with each array element
+			// save the return vale for the next iteration
+			memo = callback(list[i], memo);
+		}	
+	}
+
+	// return the result
+	return memo;
+
+}
+
+let reduced = _.reduce([1, 2, 3], (v, sum) => { return v + sum });
+
+console.log('reduce[1, 2, 3]', reduced);
+
+let reducedWithInitial = _.reduce([1, 2, 3], (v, sum) => v + sum, 5);
+
+console.log('reduce[1, 2, 3] with initial val of 5', reducedWithInitial);
