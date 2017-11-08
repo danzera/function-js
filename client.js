@@ -341,8 +341,39 @@ const addES5 = function(a, b) {
 
 addES5(1);
 
+// ES6 allows for setting of default parameters withing the function declaration / parameter naming
 const addES6 = function(a, b = 6) {
 	console.log('ES6 1 + 5 =', a + b);
 }
 
 addES6(1);
+
+// IMPLEMENTING _.from()
+// create an array from an array-like object
+_.from = function(arrayLikeObj) {
+	return Array.prototype.slice.call(arrayLikeObj);
+}
+
+/* _.from() implemented using _.each()
+_.from = (arrayLikeObj) => {
+	// declare new array to be returned
+	let newArray = [];
+
+	// iterate over the array-like object
+	_.each(arrayLikeObj, (element, index, list) => {
+		newArray.push(element);
+	});
+
+	// return new array
+	return newArray;
+};
+*/
+
+var arrayLikeObj = {
+	0: 'hello',
+	1: 'goodbye',
+	length: 2
+};
+
+console.log('array-like object =', arrayLikeObj);
+console.log('_.from(arrayLikeObj) =', _.from(arrayLikeObj));
