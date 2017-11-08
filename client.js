@@ -331,3 +331,18 @@ let finalSuspectsList = _.map(filteredVideoData, (suspectObj) => {
 });
 
 console.log('final suspects list', finalSuspectsList);
+
+// DEFAULT PARAMETERS - ES5 vs. ES6
+// ES5
+const addES5 = function(a, b) {
+	b = b || 2; // set a default value for b if it's undefined;
+	console.log('ES5 1 + 2 =', a + b);
+}
+
+addES5(1);
+
+const addES6 = function(a, b = 6) {
+	console.log('ES6 1 + 5 =', a + b);
+}
+
+addES6(1);
