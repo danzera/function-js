@@ -150,6 +150,7 @@ _.each(colors, function(element, index, list) {
 console.log('templeGoers', templeGoers);
 
 // IMPLEMENTING _.map USING _.each THAT WE JUST WROTE
+// _.map() cycles through an array and return a NEW array of mutated elements from the original array
 _.map = function(list, iterator) {
 	let newArray = [];
 
@@ -314,15 +315,19 @@ _.filter = (arr, callback) => {
 */
 
 let filteredVideoData = _.filter(videoData, (suspectObj) => {
-	if (suspectObj.present) {
-		return true;
-	} else {
-		return false;
-	}
+	return suspectObj.present;
 });
 
 console.log('videoData', videoData);
 console.log('filtered videData', filteredVideoData);
 
 let testObj = {hi: 'hello', bye: 'goodbye'};
-console.log()
+console.log(_.filter(testObj, (suspectObj) => {
+	return suspectObj.present;
+}));
+
+let finalSuspectsList = _.map(filteredVideoData, (suspectObj) => {
+	return suspectObj.name;
+});
+
+console.log('final suspects list', finalSuspectsList);
